@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Employee Hub
 
-## Getting Started
+Employee Hub is a comprehensive employee management system designed to streamline HR processes and enhance workplace efficiency. Built with cutting-edge web technologies, it offers a robust and user-friendly interface for managing employee data, tracking performance, and facilitating communication within your organization.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [Database Management](#database-management)
+- [Authentication](#authentication)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Employee Profile Management
+- Attendance Tracking (under developement)
+- Performance Evaluation (under developement)
+- Leave Management (under developement)
+- Document Repository (under developement)
+- Internal Communication Tools (under developement)
+- Reporting and Analytics Dashboard (under developement)
+- Role-based Access Control (under developement)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
 
-## Learn More
+- **Frontend:**
+  - Next.js 14.2.5: React framework for building user interfaces
+  - TypeScript: Typed superset of JavaScript for improved developer experience
+  - Tailwind CSS: Utility-first CSS framework for rapid UI development
+  - Shadcn UI: Customizable UI component library
 
-To learn more about Next.js, take a look at the following resources:
+- **Backend:**
+  - Next.js API Routes: Serverless API endpoints
+  - Prisma ORM: Next-generation ORM for Node.js and TypeScript
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Database:**
+  - Supabase: Open-source Firebase alternative, providing PostgreSQL database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Authentication:**
+  - Clerk: Complete user management solution
 
-## Deploy on Vercel
+- **Deployment:**
+  - Vercel: Platform for deploying and scaling Next.js applications
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Prerequisites
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Ensure you have the following installed on your local machine:
+
+- Node.js (v20.0.0 or higher)
+- npm (v10.0.0 or higher) 
+- Git
+
+## Installation
+
+1. Clone the repository:
+- git clone https://github.com/Shivkumar-Raghuwanshi/employee-hub.git
+
+2. Navigate to the project directory:
+- cd employee-hub
+
+3. Install dependencies:
+- npm install
+
+
+## Configuration
+
+1. Create a `.env.local` file in the root directory of the project.
+
+2. Add the following environment variables:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/
+
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# Connect to Supabase via connection pooling with Supavisor.
+DATABASE_URL=
+# Direct connection to the database. Used for migrations.
+DIRECT_URL=
+                
+## Running the Application
+
+To run the application in development mode:
+- npm run dev
+
+The application will be available at `http://localhost:3000`.
+
+## Database Management
+
+This project uses Prisma ORM for database management. To set up and manage your database:
+
+1. Generate Prisma client:
+- npx prisma generate
+2. Run database migrations:
+- npx prisma migrate dev
+3. To view and manage your data, use Prisma Studio:
+- npx prisma studio
+
+## Authentication
+
+Employee Hub uses Clerk for user authentication and management. Refer to the [Clerk documentation](https://clerk.dev/docs) for detailed information on setting up and customizing authentication flows.
+
+## Deployment
+
+This project is configured for seamless deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel.
+2. Configure the environment variables in your Vercel project settings.
+3. Deploy the application.
+
+Vercel will automatically build and deploy your application on every push to the main branch.
+
+## Contributing
+
+We welcome contributions to Employee Hub! Please follow these steps to contribute:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and commit them: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Submit a pull request
+
+Please ensure your code adheres to the project's coding standards and includes appropriate tests.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
