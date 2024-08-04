@@ -1,5 +1,6 @@
 'use client';
 
+// Import necessary dependencies and components
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Employee } from '@/types/employee';
@@ -19,13 +20,16 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
+// Main component for displaying the list of employees
 export default function EmployeeList() {
+  // State hooks for managing employees data, loading state, error, and delete dialog
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null);
 
+  // Fetch employees data when component mounts
   useEffect(() => {
     fetch('/api/employees')
       .then(response => response.json())
@@ -40,6 +44,7 @@ export default function EmployeeList() {
       });
   }, []);
 
+  // Function to delete an employee
   const deleteEmployee = async (id: string) => {
     try {
       const response = await fetch(`/api/employees/${id}`, { method: 'DELETE' });
@@ -54,11 +59,13 @@ export default function EmployeeList() {
     }
   };
 
+  // Handler for delete button click
   const handleDeleteClick = (employee: Employee) => {
     setEmployeeToDelete(employee);
     setIsDeleteDialogOpen(true);
   };
 
+  // Handler for confirming employee deletion
   const confirmDelete = async () => {
     if (employeeToDelete) {
       await deleteEmployee(employeeToDelete.id);
@@ -67,9 +74,11 @@ export default function EmployeeList() {
     }
   };
 
+  // Render loading state or error state if applicable
   if (isLoading) return <LoadingState />;
   if (error) return <ErrorState message={error} />;
 
+  // Render the main employee list
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-5xl mx-auto shadow-md rounded-lg overflow-hidden">
@@ -143,6 +152,7 @@ export default function EmployeeList() {
   );
 }
 
+// Component to display loading state
 function LoadingState() {
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-br from-gray-50 to-blue-50">
@@ -154,6 +164,7 @@ function LoadingState() {
   );
 }
 
+// Component to display error state
 function ErrorState({ message }: { message: string }) {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-50 to-blue-50">
@@ -164,6 +175,7 @@ function ErrorState({ message }: { message: string }) {
   );
 }
 
+// Component to display when there are no employees
 function EmptyState() {
   return (
     <div className="text-center py-16 px-4">

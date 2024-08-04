@@ -1,5 +1,6 @@
 "use client";
 
+// Import necessary dependencies and components
 import { useState, useEffect } from "react";
 import { Employee } from "@/types/employee";
 import Link from "next/link";
@@ -22,12 +23,15 @@ import {
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
+// Main component to display employee details
 export default function EmployeeDetails({ id }: { id: string }) {
+  // State hooks for managing employee data, loading state, and errors
   const [employee, setEmployee] = useState<Employee | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
+  // Fetch employee data when component mounts or id changes
   useEffect(() => {
     fetch(`/api/employees/${id}`)
       .then((response) => response.json())
@@ -42,6 +46,7 @@ export default function EmployeeDetails({ id }: { id: string }) {
       });
   }, [id]);
 
+  // Handler for update button click
   const handleUpdateClick = () => {
     toast({
       title: "Update functionality",
@@ -50,15 +55,19 @@ export default function EmployeeDetails({ id }: { id: string }) {
     });
   };
 
+  // Render loading skeleton, error message, or employee details based on state
   if (isLoading) return <EmployeeDetailSkeleton />;
   if (error) return <ErrorMessage message={error} />;
   if (!employee) return <ErrorMessage message="Employee not found" />;
 
+  // Render employee details
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-4xl mx-auto mt-8 shadow-lg rounded-lg overflow-hidden bg-white">
+        {/* Card header with employee name and country flag */}
         <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8">
           <CardTitle className="text-3xl font-bold flex items-center justify-between">
+            {/* Employee name and role */}
             <div className="flex items-center">
               <div className="bg-white p-3 rounded-full mr-6 shadow-lg">
                 <User className="h-12 w-12 text-blue-600" />
@@ -70,15 +79,18 @@ export default function EmployeeDetails({ id }: { id: string }) {
                 </p>
               </div>
             </div>
+            {/* Country flag */}
             <CountryFlag country={employee.addressCountry} size="lg" />
           </CardTitle>
         </CardHeader>
         <CardContent className="p-8">
+          {/* Address section */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 flex items-center text-gray-800">
               <MapPin className="mr-3 h-6 w-6 text-blue-500" /> Address
             </h2>
             <div className="bg-gray-50 p-6 rounded-lg space-y-2">
+              {/* Address details */}
               <p className="flex items-center text-gray-700">
                 <Building className="mr-3 h-5 w-5 text-blue-500" /> {employee.addressLine1}
               </p>
@@ -94,11 +106,13 @@ export default function EmployeeDetails({ id }: { id: string }) {
             </div>
           </div>
 
+          {/* Contact Methods section */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
               <Mail className="mr-3 h-6 w-6 text-blue-500" /> Contact Methods
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Map through contact methods */}
               {employee.contactMethods.map((contact, index) => (
                 <div
                   key={index}
@@ -115,6 +129,7 @@ export default function EmployeeDetails({ id }: { id: string }) {
             </div>
           </div>
 
+          {/* Navigation and action buttons */}
           <div className="flex justify-between items-center mt-8">
             <Link href="/">
               <Button
@@ -137,6 +152,7 @@ export default function EmployeeDetails({ id }: { id: string }) {
   );
 }
 
+// Skeleton component for loading state
 function EmployeeDetailSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -159,6 +175,7 @@ function EmployeeDetailSkeleton() {
   );
 }
 
+// Error message component
 function ErrorMessage({ message }: { message: string }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex flex-col items-center justify-center p-4">
