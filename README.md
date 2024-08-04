@@ -47,6 +47,9 @@ Employee Hub is a comprehensive employee management system designed to streamlin
 
 - **Deployment:**
   - Vercel: Platform for deploying and scaling Next.js applications
+  - 
+## Watch the video by clicking on the thumbnail below:
+[![API Endpoints](https://img.youtube.com/vi/wgrbf3yfdlg/maxresdefault.jpg)](https://www.youtube.com/embed/wgrbf3yfdlg?si=9SvVzsYagBc-7ZQ_)
 
 ## Prerequisites
 
